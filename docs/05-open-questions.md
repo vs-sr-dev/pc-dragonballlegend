@@ -13,13 +13,12 @@ logo, `11-runtime.md`).
    50 Hz it lasts as long as its music track). Was the European release
    meant to run slower, or did it only because Europe's Saturns ran at
    50 Hz? Which does the port keep: the user's choice.
-2. **The voices: where, and in what language?** 1 710 clips of 8-bit
-   PCM in `SS_SND.BIN`, "more than 1 500 lines" in the Japanese
-   afterword; but the story's first scene speaks none: in Beetle it is
-   music alone (heard by the user; the recording correlates at 1.00 with
-   the CD-DA track throughout). The lines are perhaps the battles'
-   (inferred). Their language, and their rate (about 36 000 bytes a
-   second over 2.5 hours, if mono), are not known.
+2. **The voices' format.** The battles speak, in Japanese (heard by the
+   user in the runtime, session 2): the European release kept the
+   original voice actors. The story's first scene speaks none (music
+   alone, as in Beetle). 1 710 clips of 8-bit PCM in `SS_SND.BIN`; their
+   rate (about 36 000 bytes a second over 2.5 hours, if mono) and how the
+   game picks them are not read yet.
 3. **Where the French text lives.** None of the programs holds ASCII
    text; the menus' words are graphics. The story's text (episode cards
    such as `LES SUPERSAIENS CONTRE LES MERCENAIRES DE L'ESPACE`) is drawn

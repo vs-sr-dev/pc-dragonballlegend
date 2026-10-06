@@ -83,3 +83,8 @@ Mednafen does (`10-saturnkit.md`); the 32 bytes land in a VDP1 command
 slot that nothing draws, and the battle's first screen comes: Goku,
 Gohan, Piccolo and Krillin on the field, their portraits (`OVER`) and
 the POWER BALANCE gauge.
+
+The user then played the battles in the window: they work and look
+right, and they speak, in Japanese: the European release kept the
+original voices, with its text in French. On this the user called the
+port playable (its criterion for publishing a port).

@@ -105,8 +105,9 @@ frame change after the VBlank-OUT handler, as Mednafen
 
 The game runs as far as it has been played: through the title, the
 menu and the story's first scene into the first battle's opening screen
-(the user's game, `tools/scripts/to-the-first-battle.txt`). The battle
-itself has not been played yet.
+(the user's game, `tools/scripts/to-the-first-battle.txt`), and the
+battles, played by the user: they work, and they speak in Japanese (the
+European release kept the original voices, its text in French).
 
 ```sh
 python tools/run.py --play            # the game in a window

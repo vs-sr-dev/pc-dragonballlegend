@@ -35,7 +35,7 @@ sector-aligned.
 | 1 | 2 | 4 096 | |
 | 2 | 2 | 40 960 | |
 | 3 | 61 | 737 280 | the first starts with a table of 16-bit offsets: sequences or banks (inferred) |
-| 4 | 1 710 | 323 149 824 | the speech: 8-bit signed PCM by its samples (silence reads 00, 01, FF) |
+| 4 | 1 710 | 323 149 824 | the speech, in Japanese (heard in the battles): 8-bit signed PCM by its samples (silence reads 00, 01, FF) |
 
 The driver is not Sega's (the other saturnkit ports run Sega's 1.27 and
 1.28); its strings name its makers. 1 710 clips match the afterword's

@@ -18,6 +18,7 @@ a saturnkit commit and what this game asked of it.
 | 2 | db53060 | README |
 | 2 | bd3fd6c | runtime: VDP1 takes the VBlank's end at the next HBlank, as Mednafen: a VBlank-OUT handler's frame change comes in the same blanking |
 | 2 | 97047f9 | runtime: backup RAM answers over 0x00180000-0x001FFFFF (64 KiB repeated), as Mednafen: the first battle's sprite loading reads one SCU DMA source there |
+| 2 | e4a6fbd | README: this port in the ports table, at its publication |
 
 ## Session 1: what held, and what did not
 
@@ -80,7 +81,8 @@ scratchpad.
   script and a note in its `docs/11-runtime.md`.
 * **97047f9** (backup RAM's mirror): an access there was fatal before;
   all four byte-identical against runs made at bd3fd6c (X JAPAN with its
-  new script). All four moved to 97047f9.
+  new script). All four moved to 97047f9, then to e4a6fbd (the README),
+  and were pushed with saturnkit when this port went public.
 
 ## What this game will ask next
 

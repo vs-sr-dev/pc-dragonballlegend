@@ -78,3 +78,7 @@
   the loading picture says `Chergemant...`; the run stopped on an SCU
   DMA from backup RAM's mirror at 0x001F0010, which saturnkit now maps
   as Mednafen does (97047f9, the four other ports byte-identical); the battle's first screen follows.
+* **Played by the user** in the battles: they work and look right, the
+  voices are Japanese. The port is playable, the user's criterion for
+  publishing it: the repository went public, and saturnkit's README
+  names it.
