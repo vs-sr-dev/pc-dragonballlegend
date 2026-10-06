@@ -45,7 +45,7 @@ and its speech. Settle PAL (open question 2) from what the game counts.
 * Beetle: the Bandai logo at about 24 s after power-on, the title at
   about 96 s; `100:START,110:C,124:C` reaches the story's first scene,
   its music the piece on tracks 10–17, then the chapter card at 186 s.
-* The voices' language: asked of the user (Beetle's recording,
-  `build/oracle4/story-intro.wav`).
+* The story's first scene has no speech (the user heard Beetle's
+  recording): look for the 1 710 clips in a battle (open question 3).
 * Bash heredocs feeding `python -` mangle backslashes and non-ASCII:
   use files.

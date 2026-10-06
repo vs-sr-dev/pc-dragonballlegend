@@ -28,7 +28,7 @@
   through the Bandai logo, the opening movie, the French title
   (`APPUIES SUR START`), the menu (`HISTOIRE`, `COMBAT`, `OPTION`, CD-DA
   track 2) and the story's first scene (the Saiyans' arrival, the piece
-  on tracks 10–17) to its chapter card, `EPISODE 1 / LES SUPERSAIENS
+  on tracks 10–17, music alone: no speech, as the user heard) to its chapter card, `EPISODE 1 / LES SUPERSAIENS
   CONTRE LES MERCENAIRES DE L'ESPACE`. C confirms in the menus.
 * **Curiosities** (`04-curiosities.md`): the Japanese team's afterword,
   a Shift-JIS file still on the European disc (the main programmer's

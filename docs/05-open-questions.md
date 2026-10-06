@@ -11,10 +11,13 @@
    speech and subtitle timing, its game speed)? The Japanese original
    ran on a 60 Hz Saturn: was the European one slowed to 5/6, or
    retimed? saturnkit's runtime runs every disc at 59.94 Hz.
-3. **The voices.** Japanese or French? 1 710 clips of 8-bit PCM in
-   `SS_SND.BIN`, "more than 1 500 lines" in the Japanese afterword; the
-   rate of the clips is not known (about 36 000 bytes a second over 2.5
-   hours, if mono).
+3. **The voices: where, and in what language?** 1 710 clips of 8-bit
+   PCM in `SS_SND.BIN`, "more than 1 500 lines" in the Japanese
+   afterword; but the story's first scene speaks none: in Beetle it is
+   music alone (heard by the user; the recording correlates at 1.00 with
+   the CD-DA track throughout). The lines are perhaps the battles'
+   (inferred). Their language, and their rate (about 36 000 bytes a
+   second over 2.5 hours, if mono), are not known.
 4. **The `MV_TD` movies**: game play recorded as Cinepak, decoded grey
    by ffmpeg. Grey on the Saturn too, or a Cinepak variant ffmpeg reads
    wrong? Are they the title's attract demos (the title was left for

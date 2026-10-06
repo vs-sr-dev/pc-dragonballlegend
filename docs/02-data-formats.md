@@ -51,7 +51,7 @@ byte for byte). In Beetle's recording, matched by `tools/cdda_match.py`:
 | When | Track | |
 |---|---|---|
 | the main menu (MODE) | 2 | correlation 0.97 |
-| the story's opening scene (the Saiyans' arrival) | 10–17 | correlation 1.00 |
+| the story's opening scene (the Saiyans' arrival) | 10–17 | correlation 1.00; no speech over it (heard by the user) |
 | the opening movie, the title screen | — | not CD: the movie's own sound, then silence or the driver |
 
 The afterword's composer, Kenji Yamamoto, describes the music as
