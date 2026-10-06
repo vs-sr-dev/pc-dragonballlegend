@@ -17,6 +17,7 @@ a saturnkit commit and what this game asked of it.
 | 2 | c20d3c2 | landings: `mov.l #X,rn; lds rn,pr; rts` makes X an address returned to without a call (the task list's longjmp); the recompiler makes it a label its calls unwind to, the runtime throws `SH2Unwind` for a return there |
 | 2 | db53060 | README |
 | 2 | bd3fd6c | runtime: VDP1 takes the VBlank's end at the next HBlank, as Mednafen: a VBlank-OUT handler's frame change comes in the same blanking |
+| 2 | 97047f9 | runtime: backup RAM answers over 0x00180000-0x001FFFFF (64 KiB repeated), as Mednafen: the first battle's sprite loading reads one SCU DMA source there |
 
 ## Session 1: what held, and what did not
 
@@ -77,6 +78,9 @@ scratchpad.
   6.4 s): closer. Its pad script was moved from VBlank 7500 to 7210 and
   still reaches the corridor. All four moved to bd3fd6c, X JAPAN with its
   script and a note in its `docs/11-runtime.md`.
+* **97047f9** (backup RAM's mirror): an access there was fatal before;
+  all four byte-identical against runs made at bd3fd6c (X JAPAN with its
+  new script). All four moved to 97047f9.
 
 ## What this game will ask next
 

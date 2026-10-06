@@ -74,3 +74,7 @@
   (open question 1, for the user).
 * **Tools**: `tools/run.py` (to the chapter card), `tools/findptr.py`
   (where a program gets an address), `tools/vdp1list.py`.
+* **Played by the user** to the first battle (`tools/scripts/to-the-first-battle.txt`):
+  the loading picture says `Chergemant...`; the run stopped on an SCU
+  DMA from backup RAM's mirror at 0x001F0010, which saturnkit now maps
+  as Mednafen does (97047f9, the four other ports byte-identical); the battle's first screen follows.

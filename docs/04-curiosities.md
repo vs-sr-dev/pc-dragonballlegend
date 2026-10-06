@@ -92,6 +92,14 @@ programs draw was translated.
 The title screen asks `APPUIES SUR START` (the imperative is
 *appuie*): as on the disc, not a dump's fault.
 
+## "Chergemant..."
+
+The picture shown while a battle loads (Vegeta and Nappa over a burst
+of speed lines) has its word drawn into it, misspelt: `Chergemant...`
+for *Chargement...* (seen by the user in the runtime, session 2). With
+`APPUIES SUR START` on the title, the French release's lettering had
+no proofreader.
+
 ## Tracks 10 to 17
 
 Eight CD-DA tracks are the same 55-second piece, byte for byte. In

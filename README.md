@@ -103,16 +103,17 @@ frame change after the VBlank-OUT handler, as Mednafen
 
 ## Playing it
 
-The game runs as far as it has been run: through the title and the
-menu into the story's first scene. The battles have not been reached
-yet.
+The game runs as far as it has been played: through the title, the
+menu and the story's first scene into the first battle's opening screen
+(the user's game, `tools/scripts/to-the-first-battle.txt`). The battle
+itself has not been played yet.
 
 ```sh
 python tools/run.py --play            # the game in a window
 ```
 
 Keys (in `saturnkit/runtime/host.cpp`): the arrows, Enter for START,
-Z X C for A B C (C confirms in the menus), A S D for X Y Z, Q W for L R;
+Z X C for A B C (A or C confirms in the menus), A S D for X Y Z, Q W for L R;
 F11 fullscreen, F12 a picture. A gamepad works too. Each game is
 recorded to `build/run/play-DATE-TIME.txt`; `python tools/run.py
 --input @that-file` plays it again, headless. The runtime runs at 60

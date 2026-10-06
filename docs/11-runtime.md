@@ -63,3 +63,23 @@ The runs stopped on calls to task handlers discovery had not found, and
 on the task list's longjmp; both are now saturnkit's
 (`09-recompiler.md`). From the boot to the chapter card no call to a
 non-entry and no wrong return.
+
+## Played by the user: to the first battle
+
+The user played in the window (`--play`): START skips the opening movie
+and the story's scene, A confirms as C does; from the menu into the
+story, past the chapter card, and through the loading picture
+(`Chergemant...`, `04-curiosities.md`) into `ATB`, the first battle
+(58 s into the game). Kept as `tools/scripts/to-the-first-battle.txt`
+(`python tools/run.py --input @tools/scripts/to-the-first-battle.txt
+--vblanks 6000`).
+
+At 77 s the run stopped: `ATB` loads its fighters' sprites by SCU DMA,
+a command and a picture each, from a list; one more transfer reads its
+source at 0x001F0010, past the list's end. On the Saturn that is backup
+RAM, which answers anywhere in 0x00180000-0x001FFFFF (64 KiB repeated);
+the runtime knew only the first 64 KiB. saturnkit now repeats it as
+Mednafen does (`10-saturnkit.md`); the 32 bytes land in a VDP1 command
+slot that nothing draws, and the battle's first screen comes: Goku,
+Gohan, Piccolo and Krillin on the field, their portraits (`OVER`) and
+the POWER BALANCE gauge.

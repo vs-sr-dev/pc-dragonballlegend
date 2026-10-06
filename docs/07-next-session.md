@@ -8,14 +8,15 @@ comic-strip scene to its chapter card, at Beetle's rhythm
 (`11-runtime.md`). `python tools/recomp.py --build --test`, then
 `python tools/run.py` (headless, to the card), `--play` for the window.
 
-## First: the user plays
+## First: the user plays the first battle
 
-`python tools/run.py --play`: from the title (Enter = START, C = C on
-the keyboard) into the story and past the chapter card. The user reports
-the pictures, the music, the text, and whether the speed feels right
-(the runtime runs at the Japanese 60 fields a second; open question 1).
-Each game is recorded to `build/run/play-*.txt` and can be given back
-headless with `--input @FILE`.
+Done in session 2 already: the user played to the first battle
+(`tools/scripts/to-the-first-battle.txt`), and the stop there is fixed.
+Next, `python tools/run.py --play` into the battle itself: the pictures,
+the music, the speech (if any), the controls, and whether the speed
+feels right (the runtime runs at the Japanese 60 fields a second; open
+question 1). Each game is recorded to `build/run/play-*.txt` and can be
+given back headless with `--input @FILE`.
 
 ## Then
 
@@ -32,7 +33,8 @@ headless with `--input @FILE`.
 
 ## Keep in mind
 
-* In the menus C confirms (START only leaves the title).
+* In the menus A or C confirms; START leaves the title and skips the
+  opening movie and the story's scenes.
 * Beetle (PAL, wall-clock): the Bandai logo at about 24 s, the title at
   about 96 s; `100:START,110:C,124:C` reaches the story's first scene.
   The runtime (60 Hz, VBlanks): `6000:START,6006:,7300:C,7306:,7900:C,7906:`.
