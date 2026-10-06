@@ -1,0 +1,20 @@
+# BYOA: no content from the original disc enters the repo.
+build/
+iso/
+*.rar
+*.7z
+*.cue
+*.bin
+*.BIN
+*.iso
+*.ISO
+*.chd
+*.wav
+*.png
+*.nfo
+*.DOC
+__pycache__/
+*.pyc
+
+# the private brief for each session
+PROMPT.md
