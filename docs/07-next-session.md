@@ -1,51 +1,48 @@
-# Next session: saturnkit for this disc, the programs as C++, the first run
+# Next session: what the user sees, then the first battle
 
-Where things stand: the disc is read and extracted, the eight programs
-are found and discovered (`03-executables.md`), Beetle runs the game
-from the boot to the story's first chapter card (`tools/oracle.py`).
-saturnkit's submodule holds one change not yet committed: discovery
-following `bsrf`, `braf` and `mova; add` constants.
+Where things stand: IP.BIN's code, the loader and the seven programs are
+C++ and self-tested (`09-recompiler.md`); on saturnkit's runtime the game
+boots through the Bandai logo, the opening movie, the title and its
+attract demo, the menu with its CD-DA music, and the story's first
+comic-strip scene to its chapter card, at Beetle's rhythm
+(`11-runtime.md`). `python tools/recomp.py --build --test`, then
+`python tools/run.py` (headless, to the card), `--play` for the window.
 
-## 1. saturnkit, checked on every port
+## First: the user plays
 
-* **The single .bin with `PREGAP`**: in `disc.py`, a track's frames
-  before INDEX 01 that are not in the file; in `runtime/cdrom.cpp`, the
-  tracks of one file each with its own mode and start, the pregap as
-  silent sectors that are not in the file, and the TOC from them. Check:
-  `disc --info` puts track 2 at LBA 184 963 as `XX_CDA.X02` says;
-  `--audio` gives the same WAV files byte for byte.
-* **The boot through IP.BIN's initial program**: when a module covers
-  IP.BIN's code, enter it after the area block (0x06002E00, whose
-  `bra`s chain to the initial program) as the BIOS does, and go on to the
-  1st read address if it returns; without such a module, the boot as now.
-  The game's call into IP.BIN (0x06002E64) then reaches that module.
-* **Discovery's `-pic` constants** (in the submodule now): commit.
-* Every change on Virtual Hydlide, Deep Fear, X JAPAN and Albert
-  Odyssey: self-tests, headless runs byte-identical in pictures and sound
-  against runs made before; then bump the four.
+`python tools/run.py --play`: from the title (Enter = START, C = C on
+the keyboard) into the story and past the chapter card. The user reports
+the pictures, the music, the text, and whether the speed feels right
+(the runtime runs at the Japanese 60 fields a second; open question 1).
+Each game is recorded to `build/run/play-*.txt` and can be given back
+headless with `--input @FILE`.
 
-## 2. The recompiler
+## Then
 
-`tools/recomp.py` after Albert Odyssey's: IP.BIN at 0x06002000 (seeds
-0x06002E00, 0x06002E64), `0` at 0x06003000 (seeds 0x060030B6,
-0x060030D2, 0x060030F6), the seven programs at 0x06020000; build with
-clang (MSYS2); the self-test against `sh2emu`.
-
-## 3. The first run
-
-`tools/run.py`: headless from the boot, the program starts traced
-(which program is which: open question 1), pictures at the Bandai logo,
-the opening movie, the title and the menu against Beetle's; CD-DA track 2
-under the menu. Then START, C on HISTOIRE, C on DEBUT: the first scene
-and its speech. Settle PAL (open question 2) from what the game counts.
+1. Past the chapter card: what follows in the story (`INF`), and the
+   first battle (`AP_ATB`): the polygon field, the SCU DSP (open question
+   5), the slave SH-2 (6), the speech clips (2) and the driver (4).
+   Against Beetle: a pad script for the oracle that reaches the same
+   battle.
+2. COMBAT (the versus mode) and OPTION (the office-floor wallpaper).
+3. Saves: `FICHIER 1–3` and `DRAGONBALLZ` in the runtime's backup file.
+4. The speed: settle with the user whether the port keeps 60 or offers
+   50 (a PAL raster in saturnkit, chosen by the port).
+5. Loading times (open question 9).
 
 ## Keep in mind
 
 * In the menus C confirms (START only leaves the title).
-* Beetle: the Bandai logo at about 24 s after power-on, the title at
-  about 96 s; `100:START,110:C,124:C` reaches the story's first scene,
-  its music the piece on tracks 10–17, then the chapter card at 186 s.
-* The story's first scene has no speech (the user heard Beetle's
-  recording): look for the 1 710 clips in a battle (open question 3).
+* Beetle (PAL, wall-clock): the Bandai logo at about 24 s, the title at
+  about 96 s; `100:START,110:C,124:C` reaches the story's first scene.
+  The runtime (60 Hz, VBlanks): `6000:START,6006:,7300:C,7306:,7900:C,7906:`.
+* The task list's handlers are reached only through computed addresses:
+  a stop on "call to X, not an entry" is most likely one more pattern of
+  `-pic` code for discovery (`tools/findptr.py` shows how a
+  program computes X).
+* Every saturnkit change: Virtual Hydlide, Deep Fear, X JAPAN and Albert
+  Odyssey (self-tests, headless runs byte-identical or the difference
+  explained against Beetle), then bump all four. X JAPAN's pad script
+  depends on its frame pacing.
 * Bash heredocs feeding `python -` mangle backslashes and non-ASCII:
   use files.

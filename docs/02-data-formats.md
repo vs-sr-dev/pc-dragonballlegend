@@ -17,9 +17,10 @@ with Cinepak video at 320×240; ffmpeg reads them as they are.
 | `MV_TDC.BIN` | 26.0 s | 16-bit stereo, 22 254 Hz | game play: a Super Saiyan, the battle gauges |
 
 ffmpeg decodes `MV_BND` and `MV_OPD` in colour and the three `MV_TD`
-files in grey; whether they are grey on the Saturn too is open
-(question 4). The `TD` movies are probably the title screen's attract
-demos (inferred: game play, no titles).
+files in grey. The `TD` movies are the title's attract demos: left on
+the title, the game plays one in grey in a window under the logo, with
+`APPUIES SUR START` over it (seen in the runtime, session 2; not yet in
+Beetle).
 
 ## Sound: `SS_SND.BIN`
 

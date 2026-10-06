@@ -17,8 +17,8 @@ the tooling for the port. It is the fifth port built on **saturnkit**,
 the game-agnostic toolkit for Saturn reverse engineering that grew out
 of [pc-virtualhydlide](https://github.com/vs-sr-dev/pc-virtualhydlide).
 Dragon Ball Z is where saturnkit meets position-independent SHC code, a
-game with no Sega library at all, a crt0 inside IP.BIN, and a disc kept
-as a single .bin. saturnkit is a submodule here: clone with
+game with no Sega library at all, a crt0 inside IP.BIN, a task list that
+leaves its tasks by longjmp, and a disc kept as a single .bin. saturnkit is a submodule here: clone with
 `--recursive`, or run `git submodule update --init`.
 
 ## BYOA: Bring Your Own Assets
@@ -32,14 +32,17 @@ of the .bin: 8950B64B).
 ## Layout
 
     docs/            disc, format and code analysis, and the plan
-    tools/           Dragon Ball Z-specific tools: oracle.py, sheet.py, cdda_match.py, hwlits.py
+    tools/           Dragon Ball Z-specific tools: recomp.py, run.py, oracle.py, sheet.py,
+                     cdda_match.py, hwlits.py, findptr.py, vdp1list.py
     saturnkit/       game-agnostic Saturn toolkit (submodule)
     iso/, build/     your disc and everything derived from it (ignored by git)
 
 ## Tools
 
 The Python tools need only Python 3.8+; `sheet.py` needs PIL and
-`cdda_match.py` numpy. The oracle needs RetroArch with the Beetle Saturn
+`cdda_match.py` numpy. Building the recompiled C++ needs CMake, Ninja,
+clang and SDL3 (MSYS2's mingw64, found at `C:\msys64\mingw64\bin`). The
+oracle needs RetroArch with the Beetle Saturn
 core and the US/European BIOS (`mpr-17933.bin`), and ffmpeg for its
 recordings. Run everything from the repository root.
 
@@ -59,6 +62,14 @@ python -m saturnkit.recomp.discover build/extract/0 --base 06003000 --report
 python -m saturnkit.recomp.discover build/extract/AP_TLP.BIN --base 06020000 --report
 python tools/hwlits.py build/extract/0@06003000 build/extract/1@06020000
 
+# the programs to C++, built with clang (MSYS2) and checked against the interpreter
+python tools/recomp.py --build --test
+
+# run it on saturnkit's runtime: headless to the story's first chapter card, pictures at chosen VBlanks
+python tools/run.py -- --shot 5400,6900,10500
+python tools/run.py --play                 # a window, the keyboard or a gamepad
+python tools/findptr.py build/extract/AP_TLP.BIN 06020000 0602315E   # where a program gets an address
+
 # the oracle: Beetle Saturn in RetroArch, pressed and photographed from here
 python tools/oracle.py --at 100:START,110:C,124:C --every 3 --quit 200 --record
 python tools/sheet.py build/oracle                                  # the shots on one sheet
@@ -71,13 +82,42 @@ Session 1: the survey. One disc, a data track and 16 CD-DA tracks (nine
 pieces of music). IP.BIN's initial program is the game's crt0; a
 resident loader, `0`, at 0x06003000, with its own ISO 9660 reader, starts
 seven programs in turn at 0x06020000. No Sega library; SHC compiled as
-position-independent code, which saturnkit's discovery is learning to
+position-independent code, which saturnkit's discovery learned to
 follow (`bsrf`, `braf`, `mova`-relative calls): 6 066 functions, none with a
 problem. Cinepak movies, a 68000 sound driver of the game's own and
 1 710 speech clips in one 324 MB file. Beetle Saturn driven from the boot
 through the Bandai logo, the opening movie, the French title and menu,
 to the story's first scene and chapter card. The disc also carries the
 Japanese team's development afterword (`docs/04-curiosities.md`).
+
+Session 2: IP.BIN's code, the loader and the seven programs as C++
+(6 426 functions in nine modules; self-test 30 261 of 30 261 vectors) on
+saturnkit's runtime, from the boot through the Bandai logo, the opening
+movie, the French title and its attract demo, the menu with its CD-DA
+music and the story's first comic-strip scene to its chapter card, at
+Beetle's rhythm. saturnkit learned a single .bin with a `PREGAP`, the
+boot through IP.BIN's initial program, SHC's position-independent code,
+landings (the game's task list leaves its tasks by longjmp) and VDP1's
+frame change after the VBlank-OUT handler, as Mednafen
+(`docs/10-saturnkit.md`, `docs/11-runtime.md`).
+
+## Playing it
+
+The game runs as far as it has been run: through the title and the
+menu into the story's first scene. The battles have not been reached
+yet.
+
+```sh
+python tools/run.py --play            # the game in a window
+```
+
+Keys (in `saturnkit/runtime/host.cpp`): the arrows, Enter for START,
+Z X C for A B C (C confirms in the menus), A S D for X Y Z, Q W for L R;
+F11 fullscreen, F12 a picture. A gamepad works too. Each game is
+recorded to `build/run/play-DATE-TIME.txt`; `python tools/run.py
+--input @that-file` plays it again, headless. The runtime runs at 60
+fields a second, the Japanese original's speed, 6/5 of the European
+release on a PAL Saturn.
 
 ## Documentation
 
@@ -89,7 +129,9 @@ Japanese team's development afterword (`docs/04-curiosities.md`).
 * [05-open-questions.md](docs/05-open-questions.md): what is not known yet
 * [06-attack-plan.md](docs/06-attack-plan.md): feasibility, what saturnkit has and lacks, the phases, what a better Dragon Ball Z means
 * [07-next-session.md](docs/07-next-session.md): the next session's list
+* [09-recompiler.md](docs/09-recompiler.md): the programs as C++, discovery and `-pic` code, landings, the self-test
 * [10-saturnkit.md](docs/10-saturnkit.md): what this port gives saturnkit
+* [11-runtime.md](docs/11-runtime.md): the game on saturnkit's Saturn, how far it runs, the frame rate, the speed
 
 ## Licence
 

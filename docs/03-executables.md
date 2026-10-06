@@ -30,8 +30,16 @@ All three entries end in `jmp @(0x0600300C)`. The start calls the loader
 at 0x06004514 with r4 = 3, r5 = 0, r6 = 0x06020000, r7 = −1; the
 by-name entries first look the name up (0x06004090) and pass the index
 it returns. Index 3 is the root directory's fourth record (`.`, `..`,
-`0`, `1`): the boot loads `1` (inferred from the order; to be checked
-in the runtime).
+`0`, `1`): the boot loads `1`, as the runtime shows (session 2).
+
+The programs chain by name: each ends with `jmp @(0x06003004)` and r4
+pointing at the next program's name in its own data. The names each one
+holds: `1` → `AP_BND`; `AP_BND` → `AP_TLP`; `AP_TLP` → `AP_SEL`;
+`AP_SEL` → `AP_INF`, `AP_ATB`; `AP_INF` → `AP_ATB`, `AP_END`, `AP_TLP`;
+`AP_ATB` → `AP_INF`, `AP_SEL`; `AP_END` → `AP_BND`. Of the data, `1`
+names `GD_WAR`, `AP_BND` `MV_BND`, `AP_TLP` `GD_TLP`, `MV_OPD` and the
+three `MV_TD` movies, `AP_ATB` `GD_ATB` and `GD_ORV`, the others the
+`GD_` pack of their name, and all of them `SS_SND`.
 
 `0` reads the disc itself: its own ISO 9660 reader (`CD001`, `.`, `..`
 among its data) over the CD block's registers (0x25890008–0x25890020,
@@ -43,14 +51,14 @@ SYS_CHGSCUIM and 0x0600026C.
 
 ## The programs at 0x06020000
 
-| File | Size | Ends at | `main` | Role (from the names, inferred) |
+| File | Size | Ends at | `main` | Role (seen in the runtime where it says so; the rest from the names) |
 |---|---|---|---|---|
-| `1` | 114 246 | 0x0603BE46 | 0x06020254 | the first program after the boot: the logo and the opening movie? |
-| `AP_TLP.BIN` | 132 248 | 0x06040498 | 0x06020254 | the title (`TLP`: title / top?) and its menus |
-| `AP_SEL.BIN` | 179 962 | 0x0604BEFA | 0x06020254 | selection screens |
-| `AP_INF.BIN` | 195 658 | 0x0604FC4A | 0x06020254 | information / story screens |
+| `1` | 114 246 | 0x0603BE46 | 0x06020254 | the first program: writes the backup file `DRAGONBALLZ`, names `GD_WAR`, then `AP_BND` (seen: 3 s of black) |
+| `AP_TLP.BIN` | 132 248 | 0x06040498 | 0x06020254 | the opening movie, the title and its attract demos (seen) |
+| `AP_SEL.BIN` | 179 962 | 0x0604BEFA | 0x06020254 | the menus: MODE, HISTOIRE's CHOIX (seen) |
+| `AP_INF.BIN` | 195 658 | 0x0604FC4A | 0x06020254 | the story's scenes (seen: the first one and its chapter card) |
 | `AP_ATB.BIN` | 564 492 | 0x060A9D0C | 0x06020058 | the battles |
-| `AP_BND.BIN` | 126 160 | 0x0603ECD0 | 0x06020254 | with `MV_BND`, the Bandai logo's movie |
+| `AP_BND.BIN` | 126 160 | 0x0603ECD0 | 0x06020254 | the Bandai logo's movie, `MV_BND` (seen) |
 | `AP_END.BIN` | 135 422 | 0x060410FE | 0x06020254 | the ending |
 
 Each starts with the same crt0 (the first 0x4D bytes are identical in
